@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shusaku Cafe</title>
+<meta name="description" content="Shusaku Cafe - coffee is life. See our menu, find us on the map, and follow us.">
+<meta name="theme-color" content="#3B2A20">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%95%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Kantumruy+Pro:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAF6F0; --paper:#FFFFFF; --espresso:#3B2A20; --muted:#7A675A;
+  --accent:#B7793F; --accent-dark:#9A6230; --line:#E8DFD3;
+  --radius:18px; --shadow:0 6px 24px rgba(59,42,32,.08);
+  --font-body:'Inter','Kantumruy Pro',system-ui,sans-serif;
+  --font-head:'Playfair Display','Kantumruy Pro',Georgia,serif;
+}
+html[lang="km"]{
+  --font-body:'Kantumruy Pro','Inter',system-ui,sans-serif;
+  --font-head:'Kantumruy Pro','Playfair Display',sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--cream);color:var(--espresso);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.container{width:min(1100px,100% - 40px);margin-inline:auto}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(250,246,240,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-family:var(--font-head);font-weight:700;font-size:1.25rem;text-decoration:none}
+nav{display:flex;gap:26px;align-items:center}
+nav a{text-decoration:none;font-weight:500;font-size:.95rem}
+nav a:hover{color:var(--accent)}
+.lang{display:inline-flex;border:1.5px solid var(--espresso);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;padding:7px 14px;font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--espresso)}
+.lang button[aria-pressed="true"]{background:var(--espresso);color:#fff}
+@media(max-width:720px){nav a{display:none}}
+
+/* Buttons */
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 26px;border-radius:999px;font:inherit;font-weight:600;font-size:1rem;text-decoration:none;cursor:pointer;border:2px solid transparent;transition:transform .15s,background .2s,color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-dark)}
+.btn-ghost{border-color:#fff;color:#fff;background:transparent}
+.btn-ghost:hover{background:rgba(255,255,255,.14)}
+.btn-outline{border-color:var(--espresso);color:var(--espresso);background:transparent}
+.btn-outline:hover{background:var(--espresso);color:#fff}
+
+/* Hero */
+.hero{min-height:78vh;display:grid;place-items:center;text-align:center;color:#fff;
+  background:radial-gradient(1200px 520px at 50% 0%,#6B4630 0%,#3B2A20 62%,#2A1D15 100%) center/cover no-repeat}
+.hero .inner{padding:80px 0;animation:fadeUp .8s ease both}
+.badge{display:inline-block;padding:6px 18px;border:1px solid rgba(255,255,255,.5);border-radius:999px;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:22px}
+html[lang="km"] .badge{letter-spacing:0;text-transform:none}
+.hero h1{font-family:var(--font-head);font-size:clamp(2.6rem,9vw,5rem);line-height:1.12;margin-bottom:12px}
+.hero p{font-size:clamp(1.1rem,3vw,1.4rem);opacity:.92;margin-bottom:34px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* Sections */
+section{padding:84px 0;scroll-margin-top:64px}
+section.alt{background:var(--paper);border-block:1px solid var(--line)}
+h2{font-family:var(--font-head);font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.25;text-align:center;margin-bottom:10px}
+.sub{text-align:center;color:var(--muted);margin-bottom:44px}
+.about-text{max-width:640px;margin:20px auto 0;text-align:center;font-size:1.1rem}
+
+/* Menu */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
+.card{background:var(--paper);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(59,42,32,.14)}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#EADFD0}
+.card .body{padding:18px 20px 22px}
+.card h3{font-family:var(--font-head);font-size:1.2rem;line-height:1.35;margin-bottom:4px}
+.card p{color:var(--muted);font-size:.95rem}
+.price{display:inline-block;margin-top:10px;font-weight:700;color:var(--accent-dark)}
+
+/* Visit */
+.info{max-width:640px;margin:0 auto;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:10px 28px}
+section.alt .info{background:var(--cream)}
+.row{display:flex;flex-wrap:wrap;gap:6px 16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row .lbl{width:130px;flex-shrink:0;color:var(--muted);font-weight:500}
+.row .val{flex:1;min-width:0;font-weight:500;word-break:break-word}
+.row .val a{text-decoration:none;border-bottom:1px solid var(--accent)}
+.info .btns{padding:10px 0 22px}
+@media(max-width:520px){.row .lbl{width:100%}.info{padding:6px 20px}}
+
+/* QR */
+.qrbox{max-width:360px;margin:0 auto;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;text-align:center}
+#qrcode{display:inline-block;padding:14px;background:#fff;border-radius:12px;border:1px solid var(--line);margin-bottom:14px;min-height:50px}
+#qrcode img{display:block}
+.qr-url{font-size:.85rem;color:var(--muted);word-break:break-all;margin-bottom:20px}
+
+/* Footer */
+footer{background:var(--espresso);color:#E9DED1;text-align:center;padding:32px 0;font-size:.95rem}
+
+/* Print only the QR section */
+@media print{
+  body.print-qr header,body.print-qr .hero,body.print-qr section:not(#qr),body.print-qr footer,body.print-qr .qrbox .btns{display:none!important}
+  body.print-qr{background:#fff}
+  body.print-qr #qr{padding:40px 0}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container bar">
+    <a class="logo" href="#top" id="logo"></a>
+    <nav>
+      <a href="#menu" data-i18n="nav_menu"></a>
+      <a href="#about" data-i18n="nav_about"></a>
+      <a href="#visit" data-i18n="nav_visit"></a>
+      <a href="#qr" data-i18n="nav_qr"></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="km" aria-pressed="false">ខ្មែរ</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="hero" id="hero">
+    <div class="container inner">
+      <span class="badge" id="since"></span>
+      <h1 id="hero-name"></h1>
+      <p id="hero-tagline"></p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#menu" data-i18n="btn_menu"></a>
+        <a class="btn btn-ghost" id="hero-call" data-i18n="btn_call"></a>
+        <a class="btn btn-ghost" id="hero-map" target="_blank" rel="noopener" data-i18n="btn_directions"></a>
+      </div>
+    </div>
+  </div>
+
+  <section id="menu">
+    <div class="container">
+      <h2 data-i18n="menu_title"></h2>
+      <p class="sub" data-i18n="menu_sub"></p>
+      <div class="grid" id="menu-grid"></div>
+    </div>
+  </section>
+
+  <section id="about" class="alt">
+    <div class="container">
+      <h2 data-i18n="about_title"></h2>
+      <p class="about-text" id="about-text"></p>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="container">
+      <h2 data-i18n="visit_title"></h2>
+      <p class="sub" data-i18n="visit_sub"></p>
+      <div class="info">
+        <div id="info-rows"></div>
+        <div class="btns" id="visit-btns"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="follow" class="alt">
+    <div class="container">
+      <h2 data-i18n="follow_title"></h2>
+      <p class="sub" data-i18n="follow_sub"></p>
+      <div class="btns" id="social-btns"></div>
+    </div>
+  </section>
+
+  <section id="qr">
+    <div class="container">
+      <h2 data-i18n="qr_title"></h2>
+      <p class="sub" data-i18n="qr_sub"></p>
+      <div class="qrbox">
+        <div id="qrcode"></div>
+        <p class="qr-url" id="qr-url"></p>
+        <div class="btns">
+          <button type="button" class="btn btn-primary" id="dl-qr" data-i18n="btn_dl"></button>
+          <button type="button" class="btn btn-outline" id="print-qr" data-i18n="btn_print"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container" id="footer-text"></div>
+</footer>
+
+<noscript><p style="text-align:center;padding:24px">Please turn on JavaScript to see this page.</p></noscript>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* =====================================================================
+   EDIT HERE - everything you may want to change is in SETTINGS below.
+   Text boxes with { en: "...", km: "..." } have an English and a Khmer version.
+   ===================================================================== */
+const SETTINGS = {
+  shopName: "Shusaku Cafe",
+  tagline:  { en: "Coffee is life", km: "កាហ្វេគឺជាជីវិត" },
+  sinceText:{ en: "Since 2012",     km: "តាំងពីឆ្នាំ ២០១២" },   // opened 15 January 2012
+  about: {
+    en: "Shusaku Cafe has been serving fresh coffee and drinks since 2012. Come relax, meet friends, and enjoy a cup made with care.",
+    km: "ហាងកាហ្វេ Shusaku បានផ្តល់ជូនកាហ្វេ និងភេសជ្ជៈស្រស់ៗតាំងពីឆ្នាំ ២០១២។ សូមអញ្ជើញមកសម្រាកលំហែ ជួបជុំមិត្តភក្តិ និងរីករាយជាមួយកាហ្វេដែលធ្វើដោយក្តីយកចិត្តទុកដាក់។"
+  },
+
+  // EDIT: put your real opening hours here
+  hours:   { en: "Every day · 7:00 AM – 9:00 PM", km: "រៀងរាល់ថ្ងៃ · ម៉ោង ៧:០០ ព្រឹក – ៩:០០ យប់" },
+  // EDIT: street address (the row is hidden while this is empty)
+  address: { en: "", km: "" },
+  phone:   "2641629999",
+  email:   "hongpailov168@gmail.com",
+  mapsLink:"https://maps.app.goo.gl/6hBHG1rn1742Koni6",
+
+  // The QR code points to this link. Leave "" to use this page's own address.
+  // After the site is online, put its address here, e.g. "https://shusaku-cafe.netlify.app"
+  siteUrl: "",
+
+  // Social links. Paste the full link, or leave "" to hide that button.
+  social: { instagram: "", facebook: "", tiktok: "", telegram: "", whatsapp: "" },
+
+  // Big picture behind the title. Leave "" for the plain coffee-brown background.
+  heroImage: "",
+
+  // MENU. "image" can be a web link OR a file inside the images folder, e.g. "images/latte.jpg".
+  // To change a picture, replace the link/file name. "price" is hidden while empty, e.g. "$2.50".
+  menu: [
+    {
+      name:  { en: "Signature Coffee", km: "កាហ្វេពិសេស" },
+      desc:  { en: "Freshly brewed, rich and smooth.", km: "កាហ្វេស្រស់ ឆ្ងាញ់ និងទន់ភ្លន់។" },
+      price: "",
+      image: "https://marketplace.canva.com/tEtTE/MAFoAStEtTE/1/tl/canva-people-hands-holding-coffee-cups-MAFoAStEtTE.jpg"
+    },
+    {
+      name:  { en: "Iced Milk Coffee", km: "កាហ្វេទឹកដោះគោទឹកកក" },
+      desc:  { en: "Cold, creamy, and refreshing.", km: "ត្រជាក់ ទន់ល្មើយ និងស្រស់ស្រាយ។" },
+      price: "",
+      image: "https://static.vecteezy.com/system/resources/thumbnails/075/809/291/small/an-iced-coffee-with-ice-and-milk-free-photo.jpg"
+    },
+    {
+      name:  { en: "Iced Matcha", km: "ម៉ាឆាទឹកកក" },
+      desc:  { en: "Smooth matcha over ice.", km: "ម៉ាឆាទន់ភ្លន់លើទឹកកក។" },
+      price: "",
+      image: "https://static.vecteezy.com/system/resources/thumbnails/004/439/437/small/iced-matcha-green-tea-in-coffee-cafe-free-photo.jpg"
+    },
+    {
+      name:  { en: "Matcha Green Tea", km: "តែបៃតងម៉ាឆា" },
+      desc:  { en: "Light, fresh, and full of flavor.", km: "ស្រាល ស្រស់ និងមានរសជាតិពិសេស។" },
+      price: "",
+      image: "https://static.vecteezy.com/system/resources/thumbnails/082/229/483/small/glass-of-matcha-green-tea-on-plate-drink-beverage-cafe-coffee-bar-refreshment-slim-antioxidant-free-photo.jpg"
+    }
+  ]
+};
+
+/* Button and heading text (English + Khmer) */
+const I18N = {
+  en: {
+    nav_menu:"Menu", nav_about:"About", nav_visit:"Visit", nav_qr:"QR Code",
+    btn_menu:"View Menu", btn_call:"Call Us", btn_directions:"Get Directions",
+    menu_title:"Our Menu", menu_sub:"Fresh drinks, made with care.",
+    about_title:"About Us",
+    visit_title:"Visit Us", visit_sub:"We would love to see you.",
+    lbl_hours:"Opening hours", lbl_address:"Address", lbl_phone:"Phone", lbl_email:"Email",
+    btn_email:"Send Email",
+    follow_title:"Follow Us", follow_sub:"Photos, news, and offers.",
+    qr_title:"Scan to Visit Us", qr_sub:"Scan with your phone camera to open our website.",
+    btn_dl:"Download QR", btn_print:"Print QR",
+    footer:"All rights reserved."
+  },
+  km: {
+    nav_menu:"ម៉ឺនុយ", nav_about:"អំពីយើង", nav_visit:"ទីតាំង", nav_qr:"កូដ QR",
+    btn_menu:"មើលម៉ឺនុយ", btn_call:"ទូរស័ព្ទមកយើង", btn_directions:"បង្ហាញផ្លូវ",
+    menu_title:"ម៉ឺនុយរបស់យើង", menu_sub:"ភេសជ្ជៈស្រស់ៗ ធ្វើដោយក្តីយកចិត្តទុកដាក់",
+    about_title:"អំពីយើង",
+    visit_title:"មកលេងយើង", visit_sub:"យើងរង់ចាំស្វាគមន៍អ្នក",
+    lbl_hours:"ម៉ោងបើក", lbl_address:"អាសយដ្ឋាន", lbl_phone:"ទូរស័ព្ទ", lbl_email:"អ៊ីមែល",
+    btn_email:"ផ្ញើអ៊ីមែល",
+    follow_title:"តាមដានយើង", follow_sub:"រូបភាព ព័ត៌មាន និងប្រូម៉ូសិន",
+    qr_title:"ស្កេនដើម្បីចូលមើល", qr_sub:"ស្កេនដោយកាមេរ៉ាទូរស័ព្ទ ដើម្បីបើកគេហទំព័ររបស់យើង",
+    btn_dl:"ទាញយក QR", btn_print:"បោះពុម្ព QR",
+    footer:"រក្សាសិទ្ធិគ្រប់យ៉ាង។"
+  }
+};
+
+const SOCIAL_LABELS = { instagram:"Instagram", facebook:"Facebook", tiktok:"TikTok", telegram:"Telegram", whatsapp:"WhatsApp" };
+
+/* ===================== Code below: no need to edit ===================== */
+const $ = (s, el = document) => el.querySelector(s);
+const isLink = u => /^https?:\/\//i.test(u || "");
+const PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent(
+  "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='#EADFD0'/><text x='200' y='170' font-size='90' text-anchor='middle'>\u2615</text></svg>"
+);
+
+let lang = "en";
+try { lang = localStorage.getItem("lang") || "en"; } catch (e) {}
+if (!I18N[lang]) lang = "en";
+
+const t = v => (v && typeof v === "object") ? (v[lang] || v.en || "") : (v || "");
+const telHref = () => "tel:" + String(SETTINGS.phone).replace(/[^\d+]/g, "");
+
+function makeButton(cls, href, text, external) {
+  const a = document.createElement("a");
+  a.className = "btn " + cls;
+  a.href = href;
+  a.textContent = text;
+  if (external) { a.target = "_blank"; a.rel = "noopener"; }
+  return a;
+}
+
+function render() {
+  const S = SETTINGS, d = I18N[lang];
+  document.documentElement.lang = lang;
+  document.title = S.shopName + " - " + t(S.tagline);
+
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = d[el.dataset.i18n]; });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+
+  $("#logo").textContent = S.shopName;
+  $("#hero-name").textContent = S.shopName;
+  $("#hero-tagline").textContent = t(S.tagline);
+  $("#since").textContent = t(S.sinceText);
+  $("#about-text").textContent = t(S.about);
+
+  // Hero buttons
+  const heroCall = $("#hero-call"), heroMap = $("#hero-map");
+  heroCall.hidden = !S.phone;
+  if (S.phone) heroCall.href = telHref();
+  heroMap.hidden = !isLink(S.mapsLink);
+  if (isLink(S.mapsLink)) heroMap.href = S.mapsLink;
+
+  // Menu cards
+  const grid = $("#menu-grid");
+  grid.innerHTML = "";
+  S.menu.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "card";
+    const img = document.createElement("img");
+    img.referrerPolicy = "no-referrer";
+    img.loading = "lazy";
+    img.alt = t(item.name);
+    img.onerror = () => { img.onerror = null; img.src = PLACEHOLDER; };
+    img.src = item.image || PLACEHOLDER;
+    const body = document.createElement("div");
+    body.className = "body";
+    const h = document.createElement("h3");
+    h.textContent = t(item.name);
+    const p = document.createElement("p");
+    p.textContent = t(item.desc);
+    body.append(h, p);
+    if (item.price) {
+      const pr = document.createElement("span");
+      pr.className = "price";
+      pr.textContent = item.price;
+      body.append(pr);
+    }
+    card.append(img, body);
+    grid.append(card);
+  });
+
+  // Visit info rows
+  const rows = $("#info-rows");
+  rows.innerHTML = "";
+  const addRow = (label, content) => {
+    if (!content) return;
+    const r = document.createElement("div");
+    r.className = "row";
+    const l = document.createElement("span");
+    l.className = "lbl";
+    l.textContent = label;
+    const v = document.createElement("span");
+    v.className = "val";
+    if (content instanceof Node) v.append(content); else v.textContent = content;
+    r.append(l, v);
+    rows.append(r);
+  };
+  const linkNode = (href, text) => { const a = document.createElement("a"); a.href = href; a.textContent = text; return a; };
+  addRow(d.lbl_hours, t(S.hours));
+  addRow(d.lbl_address, t(S.address));
+  addRow(d.lbl_phone, S.phone ? linkNode(telHref(), S.phone) : "");
+  addRow(d.lbl_email, S.email ? linkNode("mailto:" + S.email, S.email) : "");
+
+  // Visit buttons
+  const vb = $("#visit-btns");
+  vb.innerHTML = "";
+  if (isLink(S.mapsLink)) vb.append(makeButton("btn-primary", S.mapsLink, d.btn_directions, true));
+  if (S.phone) vb.append(makeButton("btn-outline", telHref(), d.btn_call));
+  if (S.email) vb.append(makeButton("btn-outline", "mailto:" + S.email, d.btn_email));
+
+  // Social links (section hidden when none are set)
+  const sb = $("#social-btns");
+  sb.innerHTML = "";
+  Object.keys(SOCIAL_LABELS).forEach(key => {
+    const url = S.social && S.social[key];
+    if (isLink(url)) sb.append(makeButton("btn-outline", url, SOCIAL_LABELS[key] + " \u2197", true));
+  });
+  $("#follow").hidden = sb.children.length === 0;
+
+  $("#footer-text").textContent = "\u00A9 " + new Date().getFullYear() + " " + S.shopName + ". " + d.footer;
+}
+
+function setupHeroImage() {
+  if (SETTINGS.heroImage) {
+    const safe = SETTINGS.heroImage.replace(/'/g, "%27");
+    $("#hero").style.backgroundImage =
+      "linear-gradient(rgba(35,24,17,.6),rgba(35,24,17,.75)), url('" + safe + "')";
+  }
+}
+
+function setupQR() {
+  const url = SETTINGS.siteUrl || location.href.split("#")[0];
+  $("#qr-url").textContent = url;
+  const box = $("#qrcode");
+  box.innerHTML = "";
+  if (window.QRCode) {
+    new QRCode(box, { text: url, width: 220, height: 220, colorDark: "#3B2A20", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H });
+  } else {
+    box.textContent = "QR code could not load. Check the internet connection.";
+  }
+
+  $("#dl-qr").addEventListener("click", () => {
+    const src = $("#qrcode canvas") || $("#qrcode img");
+    if (!src) return;
+    const size = src.width || 220, pad = 24;
+    const out = document.createElement("canvas");
+    out.width = out.height = size + pad * 2;
+    const ctx = out.getContext("2d");
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, out.width, out.height);
+    ctx.drawImage(src, pad, pad, size, size);
+    const a = document.createElement("a");
+    a.download = SETTINGS.shopName.replace(/\s+/g, "-").toLowerCase() + "-qr.png";
+    a.href = out.toDataURL("image/png");
+    a.click();
+  });
+
+  $("#print-qr").addEventListener("click", () => {
+    document.body.classList.add("print-qr");
+    window.print();
+  });
+  window.addEventListener("afterprint", () => document.body.classList.remove("print-qr"));
+}
+
+document.querySelectorAll(".lang button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    lang = btn.dataset.lang;
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+    render();
+  });
+});
+
+setupHeroImage();
+render();
+setupQR();
+</script>
+</body>
+</html>
